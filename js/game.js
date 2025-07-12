@@ -32,15 +32,18 @@ class LogicGame extends BodyGame {
     if (this.gameActive && !block.textContent) {
       const symbol = this.move % 2 === 0 ? this.x : this.o;
       block.textContent = symbol;
-      this.move++;
       this.gameState[block.dataset.index - 1] = symbol;
       this.checkWin();
-      
-      if (this.player) {
+      if (this.gameActive) {
+        this.move++;
+        if (this.player) {
         this.player.textContent = this.move % 2 === 0 ? "X" : "O";
+        }
       }
-      if (!this.gameState.includes('')) {
-        alert('Ничья!');
+      if (this.gameActive == true && !this.gameState.includes('')) {
+        document.querySelectorAll('[data-index]').forEach(cell => {
+          cell.style.background = "lightgray";
+        });
         this.gameActive = false;
         this.showResetButton();
       }
