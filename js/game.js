@@ -17,8 +17,18 @@ class LogicGame extends BodyGame {
     ];
     this.player = document.getElementById('player-turn');
     this.resetBtn = document.getElementById('reset-btn');
-    
+    this.sounds = {
+      click: new Audio('sounds/click.wav'),
+      win: new Audio('sounds/win.mp3'),
+      draw: new Audio('sounds/draw.mp3'),
+    };
     this.initGame();
+  }
+  playSound(soundName) {
+    if (this.sounds[soundName]) {
+      this.sounds[soundName].currentTime = 0;
+      this.sounds[soundName].play().catch(e => console.error('проблема со звуком', e));
+    }
   }
   initGame() {
     document.querySelectorAll('[data-index]').forEach(block => {
@@ -34,6 +44,9 @@ class LogicGame extends BodyGame {
       block.textContent = symbol;
       this.gameState[block.dataset.index - 1] = symbol;
       this.checkWin();
+      if (this.gameActive == true) {
+        this.playSound('click');
+      }
       if (this.gameActive) {
         this.move++;
         if (this.player) {
@@ -45,6 +58,7 @@ class LogicGame extends BodyGame {
           cell.style.background = "lightgray";
         });
         this.gameActive = false;
+        this.playSound('draw');
         this.showResetButton();
       }
     }
@@ -57,6 +71,7 @@ class LogicGame extends BodyGame {
         document.querySelector(`[data-index="${b + 1}"]`).style.background = "lightgreen";
         document.querySelector(`[data-index="${c + 1}"]`).style.background = "lightgreen";
         this.gameActive = false;
+        this.playSound('win');
         this.showResetButton();
         return;
       }
