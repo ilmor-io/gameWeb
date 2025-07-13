@@ -24,7 +24,11 @@ body {
   overflow: hidden;
 }
 
-
+* {
+    -webkit-tap-highlight-color: transparent; /* Для мобильных браузеров */
+    outline: none; /* Убирает стандартное выделение */
+    user-select: none; /* Запрещает выделение текста */
+}
 .playBody {
   width: 70%;
   height: 50%;
@@ -139,7 +143,7 @@ body {
 	top: -3px;
 	left: -1px;
 	background: #fff;
-	background-image: url('/images/icon-robot.png');
+	background-image: url('../images/icon-robot.png');
 	background-size: 60%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -160,7 +164,7 @@ body {
 }
 .checkbox-google input[type=checkbox]:checked + .checkbox-google-switch:before {
 	background: #1a73e8;
-	background-image: url('/images/icon-robot.png');
+	background-image: url('../images/icon-robot.png');
 	background-size: 60%;
 	background-position: center;
 	background-repeat: no-repeat;
