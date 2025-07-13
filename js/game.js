@@ -122,6 +122,7 @@ class LogicGame extends BodyGame {
       
       if (this.gameActive) {
         this.move++;
+        this.playSound('click');
         if (this.player) {
           this.player.textContent = this.move % 2 === 0 ? "X" : "O";
         }
